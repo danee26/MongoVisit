@@ -1,7 +1,8 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const app = express();
-const port = 3000;
+
+const port = 6969;
 
 const uri = 'mongodb://mongo:27017';
 
@@ -14,7 +15,7 @@ app.get('/', async (req, res) => {
     const time = new Date();
     await db.collection('visits').insertOne({ time });
     const visits = await db.collection('visits').find().toArray();
-    res.send(`Visited at: ${time}<br>Total visits: ${visits.length}`);
+    res.send(`Visiaated at: ${time}<br>Total visits: ${visits.length}`);
   } catch (err) {
     console.error(err);
     res.status(500).send('Something broke!');

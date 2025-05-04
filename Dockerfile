@@ -1,20 +1,23 @@
 # Use official Node.js image
 FROM node:18
 
-# Create and set working directory
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json to install dependencies
+# Copy only package files to install dependencies
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies (including dev dependencies like nodemon)
 RUN npm install
 
-# Copy the rest of the app (i.e., src/ folder)
-COPY ./src /app/src
+# Install nodemon globally (optional but helpful)
+RUN npm install -g nodemon
 
-# Expose the app's port (adjust this if needed)
-EXPOSE 3000
+# Copy the rest of the source code (in case not using bind mount)
+COPY . .
 
-# Start the app
-CMD ["node", "src/server.js"]
+# Expose the app's port
+EXPOSE 6969
+
+# Default command (can be overridden by docker-compose)
+CMD ["nodemon", "src/server.js"]
