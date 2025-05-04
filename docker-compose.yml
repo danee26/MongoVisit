@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "6969:3000"
+    depends_on:
+      - mongo
+    volumes:
+      - ./src:/app/src  # This mounts the local src folder into the container during development (for hot-reloading, if needed)
+
+  mongo:
+    image: mongo:5
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
