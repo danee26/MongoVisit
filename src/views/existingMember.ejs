@@ -1,0 +1,24 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Node App</title>
+    <style>
+      h1{
+        color: red;
+      }
+    </style>
+</head>
+<body>
+    <h1>Welcome Back!</h1>
+
+    <ul>
+        <% submissions.forEach(submission => { %>
+          <li><%= submission.name %></li>
+        <% }); %>
+      </ul>
+  </body>
+</html>

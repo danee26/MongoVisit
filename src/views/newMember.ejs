@@ -1,0 +1,28 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Node App</title>
+    <style>
+      h1{
+        color: rgb(95, 255, 108);
+      }
+    </style>
+</head>
+<body>
+     <h1>Welcome To The Page!</h1>
+     <p>If you'd like to join the leaderboard, please enter your name...</p>
+     
+     <form action="/submit" method="POST">
+      <input type="text" name="name" required placeholder="Enter your name">
+      <button type="submit">Submit</button>
+    </form>
+
+ 
+
+    </ul>
+  </body>
+</html>
