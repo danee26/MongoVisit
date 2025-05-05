@@ -3,7 +3,6 @@
   const { MongoClient } = require('mongodb');
   const path = require('path');
 
-  
   const app = express();
   const port = 3000;
   const uri = 'mongodb://mongo:27017';
@@ -27,7 +26,7 @@
       await client.connect();
 
       db = client.db('mydb');
-      
+
       const time = new Date();
 
       const submissions = await db.collection('submissions').find().toArray();
@@ -59,20 +58,22 @@
 
   //Making the submit route
   app.get('/submit', async (req, res) => {
-    res.render('existingMember', {submissions});
+    const submissions = await db.collection('submissions').find().toArray();
+    
+    res.render('existingMember', {submissions} );
   });
 
   app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
   });
 
-  
 
   // Submit route - Handle name submission
 app.post('/submit', async (req, res) => {
   try {
 
     const { name } = req.body;
+    
     console.log("posted name:", name);
 
     // Convert the object to JSON format
@@ -82,7 +83,9 @@ app.post('/submit', async (req, res) => {
 
     await db.collection('submissions').insertOne(data);
 
-    return;
+    //Redirecting to the login page declared in app.get /submit
+    res.redirect('/submit');
+    // return;
 
   } catch (error) {
     console.error(error);
